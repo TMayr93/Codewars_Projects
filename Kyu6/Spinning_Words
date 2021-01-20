@@ -1,0 +1,11 @@
+#Spins words in a string depending on their length
+
+def spin_words(sentence):
+    a = sentence.split(" ")
+    news = ""
+    for i in a:
+        if len(i) >= 5:
+            news += i[::-1] + " "
+        else:
+            news += i + " "
+    return news[:-1]
