@@ -1,0 +1,25 @@
+#return an irreducible fraction of integers in an array
+
+import math
+
+def mixed_fraction(s):
+    a = s.split("/")
+    b = [int(i) for i in a]
+    c = b[0]
+    d = b[1]
+    sign_s = "-" if c and ((c < 0) ^ (d < 0)) else ""
+    c = abs(c)
+    d = abs(d)
+    if c % d == 0:
+        return "%s%s" %(sign_s, c//d)
+    elif c // d == 0:
+        e = math.gcd(c, d)
+        c = c // e
+        d = d // e
+        return "%s%s/%s" %(sign_s, c, d)
+    else:
+        e = math.gcd(c, d)
+        c = c // e
+        d = d // e
+        f = c % d
+        return "%s%s %s/%s" %(sign_s, c//d, f, d)
