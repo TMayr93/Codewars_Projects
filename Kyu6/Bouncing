@@ -1,0 +1,12 @@
+#formula to calculate bouncing reduction by gravity
+
+def bouncing_ball(h, bounce, window):
+    a = bounce * h
+    count = 0
+    if h > 0 and 0 < bounce < 1 and window < h:
+        while window < a:
+            count += 2
+            h = h * bounce
+            a = h * bounce
+        return count + 1
+    return -1
