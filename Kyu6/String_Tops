@@ -1,0 +1,16 @@
+#Finding the local tops of a zic-zac shaped string
+
+def tops(msg):
+    count = 1
+    size = 1
+    news = ""
+    if len(msg) < 2:
+        return ""
+    for i in range(len(msg)):
+        try:
+            news += msg[count]
+            count += 1 + 4 * size
+            size += 1
+        except IndexError:
+            break
+    return news[::-1]
