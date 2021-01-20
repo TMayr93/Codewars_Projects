@@ -1,0 +1,26 @@
+#Backwards version of Fizzbuzz
+
+def reverse_fizz_buzz(array):
+    a = 0
+    b = 0
+    c = 0
+    for i in range(len(array)):
+        if array[i] == "FizzBuzz":
+            a += i+1
+            break
+    for i in range(len(array)):
+        if array[i] == "Fizz":
+            b += i+1
+            break
+    for i in range(len(array)):
+        if array[i] == "Buzz":
+            c += i+1
+            break
+    if b != 0 and c!= 0:
+        return b, c
+    elif b == 0 and c == 0:
+        return a, a
+    elif b == 0:
+        return a, c
+    else:
+        return b, a
