@@ -1,0 +1,11 @@
+#checks specific properties for a given input
+
+def dig_pow(n, p):
+    a = [int(i) for i in str(n)]
+    sum = 0
+    for j in range(0, len(a)):
+        sum += a[j] ** (p+j)
+    k = sum / n 
+    if k % 1 != 0:
+        return -1
+    return k
