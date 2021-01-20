@@ -1,0 +1,15 @@
+#Automates calculating the cost of a given scenario
+
+def nbMonths(startPriceOld, startPriceNew, savingperMonth, percentLossByMonth):
+    count_months = 0
+    savings = 0
+    money_avail = startPriceOld - startPriceNew
+    while money_avail < 0:
+        count_months += 1
+        if count_months % 2 == 0:
+            percentLossByMonth += 0.5
+        startPriceOld -= startPriceOld * percentLossByMonth / 100
+        startPriceNew -= startPriceNew * percentLossByMonth / 100
+        savings += savingperMonth
+        money_avail = startPriceOld - startPriceNew + savings
+    return [count_months, round(money_avail)]
