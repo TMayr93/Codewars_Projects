@@ -1,0 +1,14 @@
+#adding the values and index numbers in a list to check for infinite loops
+
+def solution(a):
+    if (len(a) == 0):
+        return -1
+    pos = 0
+    jump = 0
+    while pos >= 0 and pos < len(a):
+        if (a[pos] == 0): return -1
+        step = a[pos]
+        a[pos] = 0
+        pos += step
+        jump += 1
+    return jump
