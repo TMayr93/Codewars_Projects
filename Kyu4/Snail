@@ -1,0 +1,33 @@
+#Given a matrix, returns the elements in counterclockwise rotation starting outwards to the center
+
+def snail(snail_map):
+    res = []
+    rotate = 0
+    print(snail_map)
+    while snail_map:
+        if rotate == 0:
+            rotate += 1
+            for i in snail_map[0]:
+                res.append(i)
+            snail_map.pop(0)
+        elif rotate == 1:
+            rotate += 1
+            for i in range(len(snail_map)):
+                res.append(snail_map[i][-1])
+                snail_map[i].pop(-1)
+        elif rotate == 2:
+            rotate += 1
+            a = snail_map[-1][::-1]
+            for i in a:
+                res.append(i)
+            snail_map.pop(-1)
+        elif rotate == 3:
+            rotate = 0
+            b = []
+            for i in range(len(snail_map)):
+                b.append(snail_map[i][0])
+                snail_map[i].pop(0)
+            b = b[::-1]
+            for i in b:        
+                res.append(i)
+    return res
