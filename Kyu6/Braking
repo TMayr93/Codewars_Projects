@@ -1,0 +1,12 @@
+#Automating calculation of distance of braking way
+
+g = 9.81
+def dist(v, mu):                        
+    v1 = v / (3.6)
+    dis1 = v1 + ((v1 ** 2) / (2 * mu * g))
+    return dis1
+
+def speed(d, mu):                        
+    b = -2 * mu * g
+    v2 = (b + ((b*b - 4 * b * d) ** (0.5))) / 2
+    return v2 * 3.6
