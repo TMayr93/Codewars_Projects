@@ -1,0 +1,15 @@
+#splits a 2D-geometry into squares
+
+def sqInRect(lng, wdth):
+    res = []
+    if lng == wdth:
+        return None
+    while lng != wdth:
+        temp = abs(lng - wdth)
+        res.append(min(wdth, lng))
+        if lng < wdth:
+            wdth = temp
+        elif wdth < lng:
+            lng = temp
+    res.append(lng)
+    return res
