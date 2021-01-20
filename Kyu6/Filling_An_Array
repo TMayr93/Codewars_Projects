@@ -1,0 +1,37 @@
+#defines functions to calculate squares, primes in a (random) range given by input
+
+import random
+
+def squares(n):
+    res = []
+    for i in range(1,n+1):
+        a = i ** 2
+        res.append(a)
+    return res
+
+def num_range(n, start, step):
+    res = []
+    for i in range(start, start + n * step ,step):
+        res.append(i)
+    return res
+
+def rand_range(n, mn, mx):
+    res = []
+    count = 0
+    while len(res)<n:
+        a = random.randint(mn,mx)
+        res.append(a)
+    return res
+
+def primes(n):
+    res = [2]
+    a = 2
+    b = 1
+    while len(res) < n:
+        a = a + b
+        for i in range(2, a):
+            if a % i == 0:
+                break
+        else:
+            res.append(a)
+    return res
