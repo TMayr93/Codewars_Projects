@@ -1,3 +1,3 @@
 # Codewars_Projects
-Includes various tasks and projects coded in Python.
-Imported from Codewars and sorted by rating.
+This repository concludes the code for various tasks and projects featured in Codewars as well as personal projects.
+The Codewars projects are sorted by their rankings, lower numbers meaning higher difficulty.
