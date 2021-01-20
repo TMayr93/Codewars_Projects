@@ -1,0 +1,17 @@
+#Forms a cross geometry with length n
+
+def pattern(n):
+    temp = ""
+    for i in range(1,n+1):
+        temp += str(i % 10)
+    rev = temp [::-1]
+    temp += rev[1:]
+    cross = ""
+    count = 0
+    for i in temp:
+        count += 1
+        if count == n:
+            cross += temp + "\n"
+        else:
+            cross += " " * (n-1) + i + "\n"
+    return cross
