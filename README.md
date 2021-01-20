@@ -1,2 +1,3 @@
 # Codewars_Projects
-A summary of various tasks in Python
+Includes various tasks and projects coded in Python.
+Imported from Codewars and sorted by rating.
