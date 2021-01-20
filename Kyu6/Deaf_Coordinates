@@ -1,0 +1,25 @@
+#given a map in matrix form, returns the elements facing a given point on the map
+
+def count_deaf_rats(town):
+    town = town.replace(" ", "")
+    town = town.split("P")
+    a = town[0]
+    b = town[1]
+    temp1 = []
+    temp2 = []
+    count = 0
+    if len(a) > 0:
+        for i in range(0,len(a)-1, 2):
+            tup = a[i] + a[i+1]
+            temp1.append(tup)
+    if len(b) > 1:
+        for i in range(0,len(b)-1, 2):
+            tup2 = b[i] + b[i+1]
+            temp2.append(tup2)
+    for i in temp1:
+        if i == "O~":
+            count += 1
+    for j in temp2:
+        if j == "~O":
+            count += 1
+    return count
