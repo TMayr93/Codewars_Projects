@@ -1,0 +1,21 @@
+#swaps the cases of alphabetical letters to upper or lower, disregarding non-aphabetical characters in the input string
+
+def swap(s,n):
+    news = ""
+    count = 0
+    a = bin(n)[2:]
+    while len(s) > len(a):
+        a += a
+    for i in range(len(s)):
+        if not s[i].isalpha():
+            count += 1
+            news += s[i]
+        elif s[i].isupper() and a[i-count] == "1":
+            news += s[i].lower()
+        elif s[i].islower() and a[i-count] == "1":
+            news += s[i].upper()
+        elif s[i].isupper() and a[i-count] == "0" or s[i].islower() and a[i-count] == "0":
+            news += s[i]
+        else:
+            news += s[i]
+    return news
