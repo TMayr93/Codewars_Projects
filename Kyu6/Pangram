@@ -1,0 +1,14 @@
+#detects if the input is a pangram
+
+import string
+
+def is_pangram(s):
+    s = s.lower()
+    res = []
+    for i in s:
+        if i.isalpha():
+            res.append(i)
+    a = set(res)
+    if len(a) == 26:
+        return True
+    return False
