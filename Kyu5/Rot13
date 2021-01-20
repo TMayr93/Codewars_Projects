@@ -1,0 +1,16 @@
+#create a string with substituted letters from the alphabet depending on their index
+
+def rot13(message):
+    alp = "abcdefghijklmnopqrstuvwxyz"
+    alp2 = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+    key = "nopqrstuvwxyzabcdefghijklm"
+    key2 = "NOPQRSTUVWXYZABCDEFGHIJKLM"
+    result = ""
+    for i in message:
+        if i in alp:
+            result += key[alp.find(i)]
+        elif i in alp2:
+            result += key2[alp2.find(i)]
+        else:
+            result += i
+    return result
