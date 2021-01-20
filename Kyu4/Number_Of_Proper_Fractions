@@ -1,0 +1,23 @@
+#Given a denominator, finds all proper fractions in range of n
+
+def proper_fractions(n):
+    primes = set()
+    functionFind = n
+    if n == 1:
+        functionFind = 0
+    else:
+        i = 2
+        while i*i <= n:
+            if n % i == 0:
+                primes.add(i)
+                n = n/i
+            else:
+                i += 1
+        if n > 1:
+            primes.add(n)   
+        if len(primes) == 0:   
+            functionFind = n - 1
+        else:
+            for j in primes:
+                functionFind = (functionFind * (j - 1))/j
+    return functionFind
