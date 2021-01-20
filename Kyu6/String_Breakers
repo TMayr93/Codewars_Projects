@@ -1,0 +1,14 @@
+#breaks an input string into even parts
+
+def string_breakers(n, st): 
+    st = st.replace(" ", "")
+    news = ""
+    count = 0
+    for i in st:
+        if count == n:
+            count = 1
+            news += "\n" + i
+        else:
+            news += i
+            count += 1
+    return news
