@@ -1,0 +1,23 @@
+#calculating a given scenario
+
+def howmuch(m, n):
+    restemp = []
+    res = []
+    temp = ""
+    temp2 = ""
+    temp3 = ""
+    if n < m:
+        m, n = n, m
+    for M in range(m, n+1):
+        if M % 7 == 2  and M % 9 == 1:
+            B = M // 7
+            C = M // 9
+            temp = "M: %s" %M
+            temp2 = "B: %s" %B
+            temp3 = "C: %s" %C
+            restemp.append(temp)
+            restemp.append(temp2)
+            restemp.append(temp3)
+            res.append(restemp)
+            restemp = []
+    return res
