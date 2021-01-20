@@ -1,0 +1,15 @@
+#Given an integer n, returns a strictly increasing sequence of numbers with the sum of squares being equal to n²
+
+def decompose(n):
+    res = [n]
+    sum = 0
+    while res:
+        current = res.pop()
+        sum += current ** 2
+        for i in range(current - 1, 0, -1):
+            if sum - (i ** 2) >= 0:
+                sum -= i ** 2
+                res.append(i)
+                if sum == 0:
+                    return res[::-1]
+    return None
