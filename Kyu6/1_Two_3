@@ -1,0 +1,57 @@
+#returns a substring or integer numbers in a string depending on even or odd numbers
+
+dict1 = {
+    "0" : "zero",
+    "2" : "two",
+    "4" : "four",
+    "6" : "six",
+    "8" : "eight",
+    "1" : "one",
+    "3" : "three",
+    "5" : "five",
+    "7" : "seven",
+    "9" : "nine"
+}
+def conv(num):
+    res = ""
+    string = str(num)
+    length = len(string)
+    if length % 2 == 0:
+        for ind, char in enumerate(string):
+            if int(string[ind]) % 2 == 1:
+                res += char
+            else:
+                count = 0
+                num_index = ind + 1
+                while num_index > len(dict1[char]):
+                    if count % 2 == 0:
+                        res += dict1[char]
+                        count += 1
+                    else:
+                        res += dict1[char].upper()
+                        count += 1
+                    num_index -= len(dict1[char])
+                if count % 2 == 0:
+                        res += dict1[char][:num_index]
+                else:
+                    res += dict1[char][:num_index].upper()
+    else:
+        for ind, char in enumerate(string):
+            if int(string[ind]) % 2 == 0:
+                res += char
+            else:
+                count = 0
+                num_index = ind + 1
+                while num_index > len(dict1[char]):
+                    if count % 2 == 1:
+                        res += dict1[char]
+                        count += 1
+                    else:
+                        res += dict1[char].upper()
+                        count += 1
+                    num_index -= len(dict1[char])
+                if count % 2 == 1:
+                        res += dict1[char][:num_index]
+                else:
+                    res += dict1[char][:num_index].upper()
+    return res
