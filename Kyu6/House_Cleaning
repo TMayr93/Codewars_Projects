@@ -1,0 +1,18 @@
+#construct a randomized house cleaning plan
+
+import random
+
+def rota(rooms):
+    res = []
+    if len(rooms) >= 7:
+        while len(res) < 7:
+            a = random.randint(0, len(rooms)-1)
+            if rooms[a] not in res:
+                res.append(rooms[a])
+    elif len(rooms) < 7:
+        for i in rooms:
+            res.append(i)
+        for i in range(0,7-len(rooms)):
+            a = random.randint(0,len(rooms)-1)
+            res.append(rooms[a])
+    return res
