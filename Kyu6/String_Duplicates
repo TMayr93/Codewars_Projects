@@ -1,0 +1,15 @@
+#Remove consecutive character duplicates in a list of strings
+
+def dup(arry):
+    res = []
+    news = ""
+    for i in range(len(arry)):
+        for j in range(len(arry[i])-1):
+            if arry[i][j] == arry[i][j+1]:
+                pass
+            else:
+                news += arry[i][j]
+        news += arry[i][-1]
+        res.append(news)
+        news = ""
+    return res
