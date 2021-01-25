@@ -1,0 +1,30 @@
+#completing the pattern of counting down a string, creating a matrix with the first elements fixed
+
+def pattern(n):
+    partnum = n % 10
+    newline = [partnum] * n
+    fixed = []
+    test = ""
+    res = [newline]
+    k = 1
+    if n < 1:
+        return ""
+    for i in range(1, n):
+        fixed.append(newline[i])
+        if partnum - k >= 0:
+            line = [partnum - k] * (n - i)
+            k += 1
+            if k > 9:
+                k = 0
+        else:
+            partnum = 9
+            k = 0
+            line = [partnum - k] * (n - i)
+            k += 1
+        newline = fixed + line
+        res.append(newline)
+    for i in range(len(res)):
+        for j in res[i]:
+            test += "".join(str(j))
+        test += "\n"
+    return test[:-1]
