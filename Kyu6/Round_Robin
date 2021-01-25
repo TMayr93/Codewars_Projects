@@ -1,0 +1,15 @@
+#creating a program that counts the scheduling time for cpu processes
+
+def roundRobin(jobs, slice, index):
+    timer = 0
+    while jobs[index] > 0:
+        for i in range(len(jobs)):
+            if jobs[i] - slice > 0:
+                jobs[i] = jobs[i] - slice
+                timer += slice
+            elif jobs[i] - slice <= 0:
+                timer += jobs[i]
+                jobs[i] = 0
+                if jobs[index] == 0:
+                    break
+    return timer
