@@ -1,0 +1,17 @@
+#given a number, minimize it by changing 1 digit and return the new number as well as the original index and inserted index
+
+def smallest(n):
+    m = n
+    s = str(n)
+    rg = range(len(s))
+    for i in rg:
+        for j in rg:
+            li = list(s)
+            d = li.pop(i)
+            li.insert(j, d)
+            z = int(''.join(li))
+            if z < m:
+                m = z
+                x = i
+                y = j
+    return [m, x, y]
