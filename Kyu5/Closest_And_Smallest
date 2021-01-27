@@ -1,0 +1,28 @@
+#calculate weight of each number in string and find the smallest 2 numbers close to each other
+
+import numpy as np
+
+def closest(strng):
+    
+    numbers = strng.split()
+    weights = [sum([int(n) for n in num]) for num in numbers]
+
+    smallest_diff = None
+    for i in range(len(weights)):
+        for j in range(i+1, len(weights)):
+            diff = np.abs(weights[i] - weights[j])
+            if smallest_diff is None or (diff < smallest_diff) or (diff == smallest_diff and min([weights[i], weights[j]]) < min([weight_i, weight_j])):
+                smallest_diff = diff
+                min_i = i
+                min_j = j
+                weight_i = weights[i]
+                weight_j = weights[j]
+                num_i = int(numbers[i])
+                num_j = int(numbers[j])
+                
+    if smallest_diff is not None:
+        result = [[weight_i, min_i, num_i], [weight_j, min_j, num_j]]
+        return sorted(result)
+    
+    else:
+        return []
