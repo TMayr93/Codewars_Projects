@@ -1,0 +1,35 @@
+#Task:
+Write the following functions of two variables
+
+som : (x, y) -> x + y
+mini : (x, y) -> min(x, y)
+maxi : (x, y) -> max(x, y)
+lcmu : (x, y) -> lcm(abs(x), abs(y) (see note for lcm)
+gcdi : (x, y) -> gcd(abs(x), abs(y) (see note for gcd)
+and
+
+function oper_array(fct, arr, init) (or operArray or oper-array) where
+
+fct is the function of to variables to apply to the array arr (fct will be one of som, mini, maxi, lcmu or gcdi)
+
+init is the initial value
+-------------------------------------------------------------------
+
+def gcdi(a, b):
+    from fractions import gcd
+    return abs(gcd(a,b))
+def lcmu(a, b):
+    from fractions import gcd
+    return abs(a*b//gcd(a,b))
+def som(a, b):
+    return a + b
+def maxi(a, b):
+    return max(a,b)
+def mini(a, b):
+    return min(a,b)
+def oper_array(fct, arr, init): 
+    out = [init]
+    
+    for i in range(len(arr)):
+        out.append(fct(out[-1], arr[i]))
+    return out[1:]
