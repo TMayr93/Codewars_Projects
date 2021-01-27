@@ -1,0 +1,25 @@
+#code and decode a string of length s
+
+from math import ceil, sqrt
+
+
+def code(s):
+    if not s: return ''
+    n = ceil(sqrt(len(s)))
+    rows = []
+
+    for i in range(n):
+        r = s[i*n:i*n+n]
+        if len(r) < n:
+            r = r.ljust(n, chr(11))
+        rows.append(r)
+    out = [''.join([rows[i][j] for i in range(n-1,-1,-1)]) for j in range(n)]
+    return '\n'.join(out)
+    
+
+def decode(s):
+    if not s: return ''
+    rows = s.split('\n')
+    n = len(rows)
+    out = [''.join([rows[i][j] for i in range(n)]) for j in range(-1,-n-1,-1)]
+    return ''.join(out).strip(chr(11))
