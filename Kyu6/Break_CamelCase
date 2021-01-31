@@ -1,0 +1,11 @@
+#splitting up a string whenever camelCase notation is spotted
+
+def solution(s):
+    news = ""
+    for i in range(len(s)-1):
+        if s[i].islower() and s[i+1].isupper():
+            news += s[i] + " "
+        else:
+            news += s[i]
+    news += s[-1]
+    return news
