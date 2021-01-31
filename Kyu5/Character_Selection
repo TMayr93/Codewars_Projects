@@ -1,0 +1,16 @@
+#given a grid of characters, return all characters that the cursor moved over with a given move set
+
+def super_street_fighter_selection(fighters, position, moves):
+    moveset = {"up" : (-1, 0), "down" : (1, 0), "right" : (0, 1), "left" : (0, -1)}
+    res = []
+    y, x = position
+    for i in moves:
+        dy, dx = moveset[i]
+        y += dy
+        if not 0 <= y < len(fighters) or fighters[y][x] == "":
+            y -= dy
+        x = (x + dx) % len(fighters[y])
+        while fighters[y][x] == "":
+            x = (x + dx) % len(fighters[y])
+        res.append(fighters[y][x])
+    return res
