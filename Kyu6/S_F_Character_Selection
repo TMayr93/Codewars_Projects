@@ -1,0 +1,31 @@
+#returns characters from a regular grid that the cursor hovered over with a given set of moves. circulates horizontally but not vertically.
+
+def street_fighter_selection(fighters, initial_position, moves):
+    res = []
+    test = []
+    init = 0
+    for i in range(len(fighters)):
+        for j in fighters[i]:
+            test.append(j)
+    for dir in moves:
+        if dir == "up":
+            init -= 6
+            if init < 0:
+                init += 6
+            res.append(test[init])
+        elif dir == "down":
+            init += 6
+            if init > 11:
+                init -= 6
+            res.append(test[init])
+        elif dir == "right":
+            init += 1
+            if init == 6 or init == 12:
+                init -= 6
+            res.append(test[init])
+        elif dir == "left":
+            init -= 1
+            if init == -1 or init == 5:
+                init += 6
+            res.append(test[init])
+    return res
