@@ -1,0 +1,21 @@
+#returns the alphabetical index of consonants in a string. adds up when next to each other and not split by a vowel
+
+def solve(s):
+    cons = "aeiou"
+    alph = "abcdefghijklmnopqrstuvwxyz"
+    news = ""
+    for i in s:
+        if i in cons:
+            news += " "
+        else:
+            news += i
+    list_s = news.split(" ")
+    count = 0
+    max = 0
+    for i in range(len(list_s)):
+        for j in list_s[i]:
+            count += alph.index(j) + 1
+        if count > max:
+            max = count
+        count = 0
+    return max
