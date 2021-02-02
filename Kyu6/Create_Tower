@@ -1,0 +1,9 @@
+#creating a tower of "*" signs of height n_floors
+
+def tower_builder(n_floors):
+    tower = []
+    for i in range(n_floors):
+        space = " " * (n_floors - i - 1)
+        a = space + "*" * (2 * i + 1) + space
+        tower.append(a)
+    return tower
