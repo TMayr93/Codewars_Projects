@@ -1,0 +1,10 @@
+#implementing a code to check which of 1000 bottles of wine is poisoned with lab rats in binary way
+
+def find(r):
+    n = [0] * 10
+    for i in range(len(n)):
+        if i in r:
+            n[i] = 1
+    n = n[::-1]
+    num = int("".join([str(i) for i in n]), 2)
+    return num
