@@ -1,0 +1,31 @@
+#input is 2 strings. checking the the character count for each string and returning the higher count in a resulting string, sorted by reversed length, then if in 1st,
+#2nd or both strings and finally in alphabetical order.
+
+def mix(s1, s2):
+    dict1 = []
+    dict2 = []
+    res = []
+    news = ""
+    
+    for i in s1:
+        if i.islower() and s1.count(i) > 1:
+            dict1.append(i)
+    for i in s2:
+        if i.islower() and s2.count(i) > 1:
+            dict2.append(i)
+    dict1 = sorted(set(dict1))
+    dict2 = sorted(set(dict2))
+    for i in dict1:
+        if i in dict2 and s2.count(i) > s1.count(i) and i not in res:
+            res.append("2:{}".format(i*s2.count(i)))
+        elif i in dict2 and s2.count(i) == s1.count(i) and i not in res:
+            res.append("=:{}".format(i*s2.count(i)))
+        elif i not in res:
+            res.append("1:{}".format(i*s1.count(i)))
+    for i in dict2:
+        if i not in dict1 and i not in res:
+            res.append("2:{}".format(i*s2.count(i)))
+    res = sorted(res, key= lambda x: x[2])
+    res = sorted(res, key= lambda x: x[0])
+    res = sorted(res, key = len, reverse = True)
+    return "/".join(res)
