@@ -1,0 +1,18 @@
+#checking valid positions for parentheses in a string (must always have an opening and closing parenthesis pair, nested is possible)
+
+def valid_parentheses(string):
+    cleans = ""
+    for i in string:
+        if i == "(" or i == ")":
+            cleans += i
+    count = 0
+    for i in range(len(cleans)):
+        if cleans[i] == "(":
+            count += 1
+        elif cleans[i] == ")":
+            count -= 1
+        if count < 0:
+            return False
+    if count == 0:
+        return True
+    return False
