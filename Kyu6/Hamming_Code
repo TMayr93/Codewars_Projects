@@ -1,0 +1,21 @@
+#functions to code and decode a string from or into a binary hamming code representation
+
+def encode(string):
+    bits = ""
+    for i in string:
+        num = bin(ord(i))[2:].zfill(8)
+        for j in num:
+            bits += j * 3
+    return bits
+
+def decode(bits):
+    temp = [bits[i:i+3] for i in range(0,len(bits),3)]
+    news = ""
+    string = ""
+    for i in temp:
+        news += max(i, key=i.count)
+    res = [news[i:i+8] for i in range(0,len(news),8)]
+    for i in res:
+        num = chr(int(i, 2))
+        string += num
+    return string
