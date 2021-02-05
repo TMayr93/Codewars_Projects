@@ -1,0 +1,17 @@
+#Creating a sorted list of strings by weighting the list through adding integer digits of each number
+
+def order_weight(strng):
+    num_list = strng.split(" ")
+    sum = 0
+    res = []
+    for i in range(len(num_list)):
+        for j in num_list[i]:
+            sum += int(j)
+        if sum > 0:
+            res.append(sum)
+        sum = 0
+    zipped = zip(res, num_list)
+    zipped1 = sorted(zipped, key = lambda t: t[1])
+    zipped1 = sorted(zipped1, key = lambda t: t[0])
+    zipped1 = [x for _,x in zipped1]
+    return " ".join(zipped1)
