@@ -1,0 +1,10 @@
+#counting valid smiley face arrays
+
+import re
+
+def count_smileys(arr):
+    r = re.compile("[:;][)D]")
+    a = len(list(filter( r.match, arr)))
+    r = re.compile("[:;][-~][)D]")
+    a += len(list(filter( r.match, arr)))
+    return a
