@@ -1,0 +1,8 @@
+#counting the sum of intervals with regard to overlapping areas
+
+def sum_of_intervals(intervals):
+    res = []
+    for i in intervals:
+        for j in range(i[0], i[1]):
+            res.append(j)
+    return len(set(res))
