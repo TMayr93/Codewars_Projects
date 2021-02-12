@@ -1,0 +1,120 @@
+#creating metaclasses similar to the django extension of python
+
+import datetime
+import re
+
+class ValidationError(Exception):
+    pass
+
+class Field:
+    def __init__(self, default=None, blank=False):
+        self._default = default
+        self.blank = blank
+        
+    @property
+    def default(self):
+        return self._default
+    
+    @staticmethod
+    def validator(validate_method):
+        def validate_extended(self, name, value):
+            if value is None:
+                if self.blank:
+                    return
+                else:
+                    raise ValidationError(f'field {name} cannot be blank')
+            validate_method(self, name, value)
+        return validate_extended
+            
+class CharField(Field):
+    def __init__(self, min_length=0, max_length=None, default=None, blank=False):
+        super().__init__(default, blank)
+        self.min_length = min_length
+        self.max_length = max_length
+        
+    @Field.validator
+    def validate(self, name, value):
+        if not isinstance(value, str):
+            raise ValidationError(f'{name} should be a string, not {type(value)}')
+        if len(value) < self.min_length:
+            raise ValidationError(f'{name} should bet at least {self.min_length} characters long')
+        if self.max_length and len(value) > self.max_length:
+            raise ValidationError(f'{name} should be no longer than {self.max_length}')
+        
+class IntegerField(Field):
+    def __init__(self, min_value=None, max_value=None, default=None, blank=False):
+        super().__init__(default, blank)
+        self.min_value = min_value
+        self.max_value = max_value       
+        
+    @Field.validator
+    def validate(self, name, value):
+        if not type(value) == int:
+            raise ValidationError(f'{name} should be an integer, not {type(value)}')
+        if self.min_value and value < self.min_value:
+            raise ValidationError(f'{name} should be greater or equal to {self.min_value}')
+        if self.max_value and value > self.max_value:
+            raise ValidationError(f'{name} should be less or equal to {self.max_value}')
+
+class BooleanField(Field):
+    @Field.validator
+    def validate(self, name, value):
+        if not isinstance(value, bool):
+            raise ValidationError(f'{name} should be boolean, not {type(value)}')
+        
+class EmailField(CharField):
+    @Field.validator
+    def validate(self, name, value):
+        super().validate(name, value)
+        if not self.validate_email(value):
+            raise ValidationError(f'email {value} is invalid')
+            
+    @staticmethod
+    def validate_email(email):  
+        if re.match(r'[.a-z]+@[a-z]+\.[a-z]{2,6}', email):  
+            return True
+        return False
+    
+class DateTimeField(Field):
+    def __init__(self, auto_now=False, blank=False, default=None):
+        super().__init__(default, blank)
+        self._default = default
+        self.auto_now = auto_now
+    
+    @Field.validator
+    def validate(self, name, value):
+        if not isinstance(value, datetime.datetime):
+            raise ValidationError
+                        
+    @property
+    def default(self):
+        if self.auto_now and self._default is None:
+            return datetime.datetime.now()
+        else:
+            return self._default
+            
+class ModelType(type):
+    def __new__(mcls, name, bases, class_dict):
+        new_class_dict = {'__fields__': dict()}
+        for class_attr_name, class_attr in class_dict.items():
+            if isinstance(class_attr, Field):
+                new_class_dict['__fields__'][class_attr_name] = class_attr
+            else:
+                new_class_dict[class_attr_name] = class_attr
+        return super().__new__(mcls, name, bases, new_class_dict)
+
+class Model(metaclass=ModelType):
+    def __init__(self, **kwargs):
+        for field_name, field in self.__fields__.items():
+            if field_name in kwargs:
+                setattr(self, field_name, kwargs[field_name])
+            else:
+                if isinstance(field, DateTimeField) and field.auto_now:
+                    now = datetime.datetime.now()
+                    setattr(self, field_name, now)
+                else:
+                    setattr(self, field_name, field.default)
+
+    def validate(self):
+        for attr_name, attr_value in vars(self).items():
+            self.__fields__[attr_name].validate(attr_name, attr_value)
