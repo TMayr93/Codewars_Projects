@@ -1,0 +1,50 @@
+#Here are 10 ribbons. The length of each ribbon is 11 units with a unique pattern (number 0-9).
+#Now let's put these ribbons on a 11x11 table. Every time a ribbon is placed, horizontal or vertical. 
+#The next ribbon and the last one are in different directions, and ensure that any two ribbons are not completely overlapped.
+
+def the_order_of(ribbons):
+    nums = "1234567890"
+    counting = 0
+    ls = ribbons.split("\n")
+    dic = {}
+    hor = []
+    ver = []
+    res = []
+    for i in nums:
+        if ribbons.count(i) > 0:
+            dic[i] = ribbons.count(i)
+    dic = dict(sorted(dic.items(), key=lambda item: item[1])[::-1])
+    for key,value in dic.items():
+        for i in range(len(ls)):
+            if ls[i].count(key) <= 1:
+                counting += 1
+            else:
+                counting = 0
+                hor.append(key)
+                break
+            if counting == 11:
+                counting = 0
+                ver.append(key)
+                break
+    if len(ver) > len(hor):
+        for j in range(len(hor)):
+            res.append(ver[j])
+            res.append(hor[j])
+        res.append(ver[-1])
+        return "".join(res)[::-1]
+    elif len(hor) > len(ver):
+        for j in range(len(ver)):
+            res.append(hor[j])
+            res.append(ver[j])
+        res.append(hor[-1])
+        return "".join(res)[::-1]
+    elif len(hor) == len(ver):
+        if dic[hor[0]] == 11:
+            for j in range(len(ver)):
+                res.append(hor[j])
+                res.append(ver[j])
+        elif dic[ver[0]] == 11:
+            for j in range(len(ver)):
+                res.append(ver[j])
+                res.append(hor[j])
+        return "".join(res)[::-1]
